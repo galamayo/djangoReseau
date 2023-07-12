@@ -71,13 +71,12 @@ def upload(request):
         caption = request.POST['caption']
 
         new_post = Post.objects.create(user=user, image=image, caption=caption)
-        new_post.save(using='users')
+        new_post.save()
 
         return redirect('/')
     else:
         return redirect('/')
     
-
 def creationCompte(request):
     
     if request.method == 'POST':
@@ -97,7 +96,7 @@ def creationCompte(request):
                 return redirect('creationCompte')
             else:
                 user = User.objects.create_user(username=username, email=email, password=password, first_name=name, last_name=prenom)
-                user.save(using='users')
+                #user.save(using='users')
                 user.save()
 
                 #log user in and redirect to settings page
@@ -107,7 +106,7 @@ def creationCompte(request):
                 #create a Profile object for the new user
                 user_model = User.objects.get(username=username)
                 new_profile = Profile.objects.create(user=user_model, id_user=user_model.id)
-                new_profile.save(using='users')
+                #new_profile.save(using='users')
                 new_profile.save()
                 return redirect('setting')
         else:
@@ -132,7 +131,6 @@ def connexion(request):
 
     else:
         return render(request, 'connexion.html')
-    
 
 @login_required(login_url='connexion')
 def setting(request):
@@ -163,7 +161,7 @@ def setting(request):
             user_profile.location = location
            
             user_profile.save()
-            user_profile.save(using='users')
+           # user_profile.save(using='users')
         
         return redirect('setting')
     return render(request, 'setting.html', {'user_profile': user_profile})

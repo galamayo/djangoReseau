@@ -77,16 +77,13 @@ WSGI_APPLICATION = 'media_social.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
-    'users' : {
-        'NAME'  : 'reseau_social',
+        'NAME'  : 'media',
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
         'USER':  'root',
-        'PASSWORD': 'dariapass'
-    }
+        'PASSWORD': 'dariapass',
+    },
+    
 }
 
 
